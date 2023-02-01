@@ -85,7 +85,14 @@ public class CatalogItemRepository : ICatalogItemRepository
     {
         try
         {
-            var result = _dbContext.CatalogItems.ToList().RemoveAll(x => x.Id == id);
+            foreach (var item in _dbContext.CatalogItems.ToList())
+            {
+                if (item.Id == id)
+                {
+                    _dbContext.CatalogItems.Remove(item);
+                }
+            }
+
             _dbContext.SaveChanges();
             return true;
         }

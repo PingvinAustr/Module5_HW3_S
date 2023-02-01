@@ -31,7 +31,14 @@ public class CatalogBrandRepository : ICatalogBrandRepository
     {
         try
         {
-            var result = _dbContext.CatalogBrands.ToList().RemoveAll(x => x.Id == id);
+            foreach (var brand in _dbContext.CatalogBrands.ToList())
+            {
+                if (brand.Id == id)
+                {
+                    _dbContext.CatalogBrands.Remove(brand);
+                }
+            }
+
             _dbContext.SaveChanges();
             return true;
         }

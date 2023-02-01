@@ -22,9 +22,9 @@ public class CatalogTypeController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Add(string brand)
+    public async Task<IActionResult> Add(string type)
     {
-        var result = await _typeService.Add(brand);
+        var result = await _typeService.Add(type);
         return Ok(new AddItemResponse<int?>() { Id = result });
     }
 

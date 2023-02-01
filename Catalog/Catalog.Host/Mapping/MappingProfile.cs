@@ -10,8 +10,9 @@ public class MappingProfile : Profile
     {
         CreateMap<CatalogItem, CatalogItemDto>()
             .ForMember("PictureUrl", opt
-                => opt.MapFrom<CatalogItemPictureResolver, string>(c => c.PictureFileName));
-        CreateMap<CatalogBrand, CatalogBrandDto>();
-        CreateMap<CatalogType, CatalogTypeDto>();
+                => opt.MapFrom<CatalogItemPictureResolver, string>(c => c.PictureFileName))
+            .ReverseMap();
+        CreateMap<CatalogBrand, CatalogBrandDto>().ReverseMap();
+        CreateMap<CatalogType, CatalogTypeDto>().ReverseMap();
     }
 }

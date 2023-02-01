@@ -31,9 +31,16 @@ public class CatalogTypeRepository : ICatalogTypeRepository
     {
         try
         {
-            var result = _dbContext.CatalogTypes.ToList().RemoveAll(x => x.Id == id);
-            _dbContext.SaveChanges();
-            return true;
+           foreach (var catalogType in _dbContext.CatalogTypes)
+            {
+                if (catalogType.Id == id)
+                {
+                    _dbContext.CatalogTypes.Remove(catalogType);
+                }
+            }
+
+           _dbContext.SaveChanges();
+           return true;
         }
         catch
         {
